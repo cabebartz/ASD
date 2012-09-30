@@ -1,0 +1,451 @@
+<!doctype html>  
+<html lang="en">
+	<head>
+
+		<meta charset="utf-8">
+		
+		<title>Mobile Bill Tracker</title>
+		
+		<!--  Mobile viewport optimized: j.mp/bplateviewport -->
+		<meta name="HandheldFriendly" content="True">
+		<meta name="MobileOptimized" content="320"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<!-- Mobile IE needs ClearType for smoothing fonts -->
+		<meta http-equiv="cleartype" content="on">
+		
+		<!-- StyleSheets under here -->
+		<link rel="stylesheet" href="css/themes/cabe.min.css" />
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile.structure-1.1.1.min.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		
+		
+		<!-- JavaScript is normally at the end of the body, except for Modernizr which enables HTML5 elements & feature detects -->
+		<script src="js/libs/modernizr.custom.min.js"></script>
+		<!-- Center the header due to wrapping in div to not cut off words -->
+		<style type="text/css">
+	    	h1 {
+	        		text-align: center;
+	    	}
+		</style>
+
+	</head>
+	<body>
+
+		<div data-role="page" id="home" Data-ajax="false">
+
+			<div data-role="header" >
+				<div>
+					<a href="#addItem">
+					<img  width="100%" src="images/checkforMUI.png"/>
+					</a>
+				</div>
+			</div> 
+			<!-- home header -->
+			<div data-role="content" data-theme="a">
+
+				<ul data-role="listview"  data-theme ="a" data-divider-theme="a" data-inset="true">
+					<li data-role="list-divider">
+						<h2>Browse By Category<h2>
+					</li>
+					<li>
+						<a href="#credit">
+							<img src="images/Credit.png"/>
+							<h2>Credit</h2>
+						</a>
+						
+					</li>
+					<li>
+						<a href="#rent">
+							<img src="images/Rent.png"/>
+							<h2>Rent</h2>
+						</a>
+						
+					</li>
+					<li>
+						<a href="#utilities">
+							<img src="images/Utilities.png"/>
+							<h2>Utilities</h2>
+						</a>
+						
+					</li>
+					<li>
+						<a href="#loans">
+							<img src="images/Loans.png"/>
+							<h2>Loans</h2>
+						</a>
+						
+					</li>
+					<li>
+						<a href="#misc">
+							<img src="images/Misc.png"/>
+							<h2>Miscellaneous</h2>
+						</a>
+						
+					</li>
+				</ul>
+			</div>
+			<!-- home content -->
+			<div data-role="footer" data-position="fixed">
+				<div data-role="navbar" data-theme="a">
+					<ul>
+						<li><a href="#info" data-icon="info">Info</a></li>
+						<li><a href="http://cabebartz.github.com/MIU-site/Week4/Gold/" Data-ajax="false" data-icon="star">Git</a></li>
+						
+						<li><a href="#display">Display</a></li>
+					</ul>	
+				</div>
+				<!-- home navbar -->
+			</div>
+			<!-- home footer -->
+		</div>
+		<!-- home page -->
+
+		<div data-role="page" id="addItem" data-ajax="false">
+
+			<div data-role="header" data-position="fixed">
+				<div>
+					<a href="#home">
+						<img border="0" src="images/CheckHeader.png" alt="Logo" style="float:left;display:inline"/>
+					</a>
+				</div>
+				<h1>Add A Bill</h1>
+			</div>
+			<!-- addItem header -->
+
+			<div data-role="content">
+
+				<div>
+					<p>* denotes required field</p>
+				</div>
+
+				<form action="" method="post" id="addBill">
+
+					<div data-role="fieldcontain">
+						<label for="categories">* Bill Category:</label>
+						<select name="categories" id="categories" class="required" data-theme="a" >
+							<option value="" data-placeholder="true">Pick A Category</option>
+							<option value="credit">Credit</option>
+							<option value="rent">Rent</option>
+							<option value="utilities">Utilities</option>
+							<option value="loans">Loans</option>
+							<option value="misc">Miscellaneous</option>
+						</select>
+					</div>
+					<!--  addItem category fieldcontain -->
+
+					<div data-role="fieldcontain">
+						<label for="billName">* Name of Bill:</label>
+						<input type="text" name="billName" id="billName" value placeholder="Please enter the name of your bill." class="required"/>
+					</div>
+					<!-- addItem billName fieldcontain -->
+
+					<div data-role="fieldcontain">
+						<label for="accountNum">Account Number:</label>
+						<input type="text" name="accountNum" id="accountNum" value placeholder="Please enter the account number." />
+					</div>
+					<!-- addItem accountNum fieldcontain -->
+
+					<div data-role="fieldcontain">
+						<label for="ammountDue">* Amount Due:</label>
+						<input type="text" name="ammountDue" id="ammountDue" value placeholder="XXX.XX" class="required number"/>
+					</div>
+					<!-- addItem ammountDue fieldcontain -->
+
+					<div data-role="fieldcontain">
+						<label for="dateDue">Due Date:</label>
+						<input type="text" name="dateDue" id="dateDue" value="09/01/2012" class="required date"/><!-- need to make date valid, but jquery format does not work-->
+					</div>
+					<!-- addItem dateDue fieldcontain -->
+
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup">
+							<legend>Is Bill Paid or Unpaid?</legend>
+							<input type="radio" value="Paid" name="isBillPaid" id="billPaid" data-theme="a" />
+							<label for="billPaid">Paid</label>
+							<input type="radio" checked="checked" value="notPaid" name="isBillPaid" id="billNotPaid" data-theme="a"/>
+							<label for="billNotPaid">Not Paid</label>
+						</fieldset>
+					</div>
+					<!-- addItem billPaid fieldcontain -->	
+
+					<div data-role="fieldcontain">
+						<label for="priority">Priority:</label>
+						<input type="range" name="priority" id="priority" value="5" min="1" max="10" data-theme="a">
+					</div>
+					<!-- addItem priority fieldcontain -->
+
+					<div data-role="fieldcontain">
+						<label for="comments">Additional Notes:</label>
+						<textarea value placeholder="Add any comments here." id="comments"></textarea>
+					</div>
+					<!-- addItem comments fieldcontain -->
+
+					<button type="submit" value="submitBill" name="submit" data-theme="b" data-inline="true">Save Bill</button>
+					<a href="#home" >cancel</a>
+				</form>
+				<div data-role="footer" data-position="fixed">
+					<div data-role="navbar">
+						<ul>
+							<li><a data-rel="back" data-icon="back">Back</a></li>
+							<li><a href="#info" data-icon="info">Info</a></li>
+							<li><a href="http://cabebartz.github.com/MIU-site/Week4/Gold/" Data-ajax="false" data-icon="star">Git</a></li>
+							
+						</ul>	
+					</div>
+					<!-- addItem navBar -->
+				</div>
+				<!-- addItem footer -->
+			</div>
+			<!-- addItem content -->
+
+		</div>
+		<!-- addItem page -->
+
+		<div data-role="page" id="credit">
+
+			<div data-role="header" data-position="fixed">
+				<div>
+					<a href="#home">
+						<img border="0" src="images/CheckHeader.png" alt="Logo" style="float:left;display:inline"/>
+					</a>
+				</div>
+				<h1>Credit<h1>
+			</div>
+			<!-- credit header -->
+
+			<div data-role="content">
+				
+			</div>
+			<!-- credit content -->
+
+			<div data-role="footer" data-position="fixed">
+				<div data-role="navbar">
+					<ul>
+						<li><a data-rel="back" data-icon="back">Back</a></li>
+						<li><a href="#info" data-icon="info">Info</a></li>
+						<li><a href="http://cabebartz.github.com/MIU-site/Week4/Gold/" Data-ajax="false" data-icon="star">Git</a></li>
+						
+					</ul>	
+				</div>
+				<!-- credit navBar -->
+			</div>
+			<!-- credit footer -->
+
+		</div>
+		<!-- credit page -->
+		
+
+
+		<div data-role="page" id="rent">
+
+			<div data-role="header" data-position="fixed">
+					<div>
+						<a href="#home">
+							<img border="0" src="images/CheckHeader.png" alt="Logo" style="float:left;display:inline"/>
+						</a>
+					</div>
+				<h1>Rent<h1>
+			</div>
+			<!-- rent header -->
+
+			<div data-role="content">
+				
+			</div>
+			<!-- rent content -->
+
+			<div data-role="footer" data-position="fixed">
+				<div data-role="navbar">
+					<ul>
+						<li><a data-rel="back" data-icon="back">Back</a></li>
+						<li><a href="#info" data-icon="info">Info</a></li>
+						<li><a href="http://cabebartz.github.com/MIU-site/Week4/Gold/" Data-ajax="false" data-icon="star">Git</a></li>
+						
+					</ul>	
+				</div>
+				<!-- rent navBar -->
+			</div>
+			<!-- rent footer -->
+
+		</div>
+		<!-- rent page -->
+		
+		<div data-role="page" id="utilities">
+
+			<div data-role="header" data-position="fixed">
+					<div>
+						<a href="#home">
+							<img border="0" src="images/CheckHeader.png" alt="Logo" style="float:left;display:inline"/>
+						</a>
+					</div>
+				<h1>Utilities<h1>
+			</div>
+			<!-- utilities header -->
+
+			<div data-role="content">
+				
+			</div>
+			<!-- utilities content -->
+
+			<div data-role="footer" data-position="fixed">
+				<div data-role="navbar">
+					<ul>
+						<li><a data-rel="back" data-icon="back">Back</a></li>
+						<li><a href="#info" data-icon="info">Info</a></li>
+						<li><a href="http://cabebartz.github.com/MIU-site/Week4/Gold/" Data-ajax="false" data-icon="star">Git</a></li>
+						
+					</ul>	
+				</div>
+				<!-- utilities navBar -->
+			</div>
+			<!-- utilities footer -->
+		</div>
+		<!-- utilities page -->
+
+		<div data-role="page" id="loans">
+
+			<div data-role="header" data-position="fixed">
+				<div>
+					<a href="#home">
+						<img border="0" src="images/CheckHeader.png" alt="Logo" style="float:left;display:inline"/>
+					</a>
+				</div>
+				<h1>Loans<h1>
+			</div>
+			<!-- loans header -->
+
+			<div data-role="content">
+				
+			</div>
+			<!-- loans content -->
+
+			<div data-role="footer" data-position="fixed">
+				<div data-role="navbar">
+					<ul>
+						<li><a data-rel="back" data-icon="back">Back</a></li>
+						<li><a href="#info" data-icon="info">Info</a></li>
+						<li><a href="http://cabebartz.github.com/MIU-site/Week4/Gold/" Data-ajax="false" data-icon="star">Git</a></li>
+						
+					</ul>	
+				</div>
+				<!-- loans navBar -->
+			</div>
+			<!-- loans footer -->
+
+		</div>
+		<!-- loans page -->
+
+		<div data-role="page" id="misc">
+
+			<div data-role="header" data-position="fixed">
+				<div>
+					<a href="#home">
+						<img border="0" src="images/CheckHeader.png" alt="Logo" style="float:left;display:inline"/>
+					</a>
+				</div>
+				<h1>Miscellaneous<h1>
+			</div>
+			<!-- misc header -->
+
+			<div data-role="content">
+
+			</div>
+			<!-- misc content -->
+
+			<div data-role="footer" data-position="fixed">
+				<div data-role="navbar">
+					<ul>
+						<li><a data-rel="back" data-icon="back">Back</a></li>
+						<li><a href="#info" data-icon="info">Info</a></li>
+						<li><a href="http://cabebartz.github.com/MIU-site/Week4/Gold/" Data-ajax="false" data-icon="star">Git</a></li>
+						
+					</ul>	
+				</div>
+				<!-- misc navBar -->
+			</div>
+			<!-- misc footer -->
+
+		</div>
+		<!-- misc page -->
+
+		<div data-role="page" id="info">
+			<div data-role="header" data-position="fixed">
+				<div>
+					<a href="#home">
+						<img border="0" src="images/CheckHeader.png" alt="Logo" style="float:left;display:inline"/>
+					</a>
+				</div>
+				<h1>About<h1>
+			</div>
+			<!-- info header -->
+
+			<div data-role="content">
+				<div data-role="collapsible" data-collapsed="true" data-theme="a">
+					<h3>Designed By</h3>
+							<ul>
+								<li>Cabe Bartz</li>
+								<li>Full Sail University</li>
+								<li>2012</li>
+							</ul>
+				</div>
+				<!-- info collapsible -->
+				<div data-role="footer" data-position="fixed">
+					<div data-role="navbar">
+						<ul>
+							<li><a data-rel="back" data-icon="back">Back</a></li>
+							<li><a href="#info" data-icon="info">Info</a></li>
+							<li><a href="http://cabebartz.github.com/MIU-site/Week4/Gold/" Data-ajax="false" data-icon="star">Git</a></li>
+							
+						</ul>	
+					</div>
+					<!-- info navBar -->
+				</div>
+				<!-- info footer -->
+			</div>
+			<!-- info content -->
+		</div>
+		<!-- info page -->
+		<div data-role="page" id="display">
+
+			<div data-role="header" data-position="fixed">
+				<div>
+					<a href="#home">
+						<img border="0" src="images/CheckHeader.png" alt="Logo" style="float:left;display:inline"/>
+					</a>
+				</div>
+				<h1>Saved Bills<h1>
+			</div>
+			<!-- display header -->
+
+			<div data-role="content">
+				<ul>
+					<li><a href="#" data-role="button" id="clear">Clear</a></li>
+				<ul>
+			</div>
+			<!-- display content -->
+
+			<div data-role="footer" data-position="fixed">
+				<div data-role="navbar">
+					<ul>
+						<li><a data-rel="back" data-icon="back">Back</a></li>
+						<li><a href="#info" data-icon="info">Info</a></li>
+						<li><a href="http://cabebartz.github.com/MIU-site/Week4/Gold/" Data-ajax="false" data-icon="star">Git</a></li>
+						
+					</ul>	
+				</div>
+				<!-- display navBar -->
+			</div>
+			<!-- display footer -->
+
+		</div>
+
+
+		<!-- JavaScript under here -->
+		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script> 
+	  	<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script> 
+		<script type="text/javascript" src="js/libs/jquery.validate.min.js"</script>
+		<script src="js/json.js" type="text/javascript"></script>
+		<script src="js/main.js" type="text/javascript"></script>
+
+	</body>
+</html>
